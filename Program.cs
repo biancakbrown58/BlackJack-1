@@ -114,7 +114,7 @@ namespace BlackJack
                 {
                     var newCard = deck[0];
                     var newTotal = 0;
-                    Console.WriteLine($"{newCard.Rank} of {newCard.Suit} with a value of {newCard.Value()}");
+                    Console.WriteLine($"{newCard.Rank} {newCard.Suit}");
                     playerHand.Add(deck[0]);
                     deck.RemoveAt(0);
 
@@ -127,7 +127,8 @@ namespace BlackJack
                     if (newTotal > 21)
                     {
                         var dealerTotal = 0;
-                        Console.WriteLine("You Bust!!");
+                        Console.WriteLine("!!You Bust!!");
+                        Console.WriteLine("The dealer wins!");
 
                         //display dealer cards
                         Console.WriteLine("Dealer's Cards");
@@ -142,16 +143,42 @@ namespace BlackJack
                         Console.WriteLine($"Dealer's total is: {dealerTotal}");
 
                     }
+
+                    // if (userInput == "stand")
+                    // {
+                    //     Console.WriteLine("You want to stand??");
+                    // }
                     else
                     {
                         Console.WriteLine("hit or stand?");
 
                     }
+
+                    //  else if (userInput == "stand")
+                    //   {
+                    //       Console.WriteLine("You want to stand?");
+                    //   }
                 }
+
 
                 else
                 {
-                    isRunning = false;
+                    var dealerTotal = 0;
+                    Console.WriteLine("you want to stand?");
+                    Console.WriteLine("Here's the Dealer's Hand");
+                    //display dealer cards
+                    Console.WriteLine("Dealer's Cards");
+                    Console.WriteLine($"{dealerHand[0].Rank} {dealerHand[0].Suit}");
+                    Console.WriteLine($"{dealerHand[1].Rank} {dealerHand[1].Suit}");
+
+                    //get dealer hand totals
+                    for (int i = 0; i < dealerHand.Count; i++)
+                    {
+                        dealerTotal += dealerHand[i].Value();
+                    }
+                    Console.WriteLine($"Dealer's total is: {dealerTotal}");
+                    // if ( dealerTotal > newTotal)
+                    // isRunning = false;
                 }
             }
 
