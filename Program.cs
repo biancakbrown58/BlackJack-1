@@ -7,7 +7,7 @@ namespace BlackJack
     {
         public string Rank;
         public string Suit;
-        //assess the method by .Value()
+        //access the method by .Value()
         public int Value()
         {
             if (Rank == "Ace")
@@ -22,14 +22,8 @@ namespace BlackJack
             {
                 return int.Parse(Rank);
             }
-
         }
-
     }
-
-
-
-
     class Program
     {
         static void Main(string[] args)
@@ -39,10 +33,7 @@ namespace BlackJack
             var suits = new List<string>() { "♣️", "♦️", "❤️", "♠️" };
             var ranks = new List<string>() { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 
-
-            // get card value. loop through the face list and parse to a number
-
-            //Gavin loop
+            // get card value. loop through the suit and rank list 
             foreach (var suit in suits)
             {
                 foreach (var rank in ranks)
@@ -56,7 +47,6 @@ namespace BlackJack
             var numberOfCards = deck.Count;
             for (var rightSide = numberOfCards - 1; rightSide >= 1; rightSide--)
             {
-                //getting one side to keep the value of them
                 var leftSide = new Random().Next(0, rightSide);
                 var leftCard = deck[leftSide];
                 var rightCard = deck[rightSide];
@@ -74,21 +64,12 @@ namespace BlackJack
             dealerHand.Add(deck[0]);
             deck.RemoveAt(0);
 
-
-
-
             //show top 2 cards
             var firstCard = deck[0];
             var secondCard = deck[1];
 
-
-            // write out value with firstcard.value()
-            // Console.WriteLine($"{firstCard.Rank} {firstCard.Suit}  with a value of {firstCard.Value()}");
-            // Console.WriteLine($"{secondCard.Rank} {secondCard.Suit}  with a value of {secondCard.Value()}");
-
             Console.WriteLine($"{firstCard.Rank} {firstCard.Suit}");
             Console.WriteLine($"{secondCard.Rank} {secondCard.Suit}");
-
 
             playerHand.Add(deck[0]);
             deck.RemoveAt(0);
@@ -96,9 +77,6 @@ namespace BlackJack
             deck.RemoveAt(0);
 
             var total = 0;
-            // var playersHandTotal = 0;
-            // var dealersHandTotal = 0;
-
             for (int i = 0; i < playerHand.Count; i++)
             {
                 total += playerHand[i].Value();
@@ -108,7 +86,6 @@ namespace BlackJack
             var isRunning = true;
             while (isRunning)
             {
-
                 var userInput = Console.ReadLine();
                 if (userInput == "hit")
                 {
@@ -122,7 +99,6 @@ namespace BlackJack
                     {
                         newTotal += playerHand[i].Value();
                     }
-
                     Console.WriteLine($"Your new total is: {newTotal}");
                     if (newTotal > 21)
                     {
@@ -141,26 +117,12 @@ namespace BlackJack
                             dealerTotal += dealerHand[i].Value();
                         }
                         Console.WriteLine($"Dealer's total is: {dealerTotal}");
-
                     }
-
-                    // if (userInput == "stand")
-                    // {
-                    //     Console.WriteLine("You want to stand??");
-                    // }
                     else
                     {
                         Console.WriteLine("hit or stand?");
-
                     }
-
-                    //  else if (userInput == "stand")
-                    //   {
-                    //       Console.WriteLine("You want to stand?");
-                    //   }
                 }
-
-
                 else
                 {
                     var dealerTotal = 0;
