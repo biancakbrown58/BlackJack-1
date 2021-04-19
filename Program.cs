@@ -67,7 +67,9 @@ namespace BlackJack
             //show top 2 cards
             var firstCard = deck[0];
             var secondCard = deck[1];
-
+            Console.WriteLine("-----------");
+            Console.WriteLine("Your cards:");
+            Console.WriteLine("-----------");
             Console.WriteLine($"{firstCard.Rank} {firstCard.Suit}");
             Console.WriteLine($"{secondCard.Rank} {secondCard.Suit}");
 
@@ -81,16 +83,23 @@ namespace BlackJack
             {
                 total += playerHand[i].Value();
             }
-            Console.WriteLine($"Your total is {total}");
-            Console.WriteLine("Would you like to hit or stand?");
+            Console.WriteLine($"Total: {total}");
+            Console.WriteLine("-------------");
+            Console.WriteLine("Hit or Stand?");
+            Console.WriteLine("-------------");
             var isRunning = true;
             while (isRunning)
             {
+                var newTotal = 0;
+                var dealerTotal = 0;
+                var newDealerTotal = 0;
                 var userInput = Console.ReadLine();
                 if (userInput == "hit")
                 {
                     var newCard = deck[0];
-                    var newTotal = 0;
+                    Console.WriteLine("--------------");
+                    Console.WriteLine("Your new card:");
+                    Console.WriteLine("--------------");
                     Console.WriteLine($"{newCard.Rank} {newCard.Suit}");
                     playerHand.Add(deck[0]);
                     deck.RemoveAt(0);
@@ -99,15 +108,16 @@ namespace BlackJack
                     {
                         newTotal += playerHand[i].Value();
                     }
-                    Console.WriteLine($"Your new total is: {newTotal}");
+                    Console.WriteLine($"New Total: {newTotal}");
                     if (newTotal > 21)
                     {
-                        var dealerTotal = 0;
-                        Console.WriteLine("!!You Bust!!");
-                        Console.WriteLine("The dealer wins!");
+                        // var dealerTotal = 0;
+                        Console.WriteLine("Oh no!!");
 
                         //display dealer cards
+                        Console.WriteLine("--------------");
                         Console.WriteLine("Dealer's Cards");
+                        Console.WriteLine("--------------");
                         Console.WriteLine($"{dealerHand[0].Rank} {dealerHand[0].Suit}");
                         Console.WriteLine($"{dealerHand[1].Rank} {dealerHand[1].Suit}");
 
@@ -116,20 +126,28 @@ namespace BlackJack
                         {
                             dealerTotal += dealerHand[i].Value();
                         }
-                        Console.WriteLine($"Dealer's total is: {dealerTotal}");
+                        Console.WriteLine($"Dealer's Total: {dealerTotal}");
+                        Console.WriteLine("~~ You Bust ~~ Dealer Wins!");
                     }
-                    else
+
+                    else if (newTotal <= 21 && newTotal > dealerTotal)
                     {
-                        Console.WriteLine("hit or stand?");
+                        Console.WriteLine("~~ You Won ~~");
+                        Console.WriteLine("Here's what the dealer had:");
+                        for (int i = 0; i < dealerHand.Count; i++)
+                        {
+                            dealerTotal += dealerHand[i].Value();
+                        }
+                        Console.WriteLine($"Dealer's Total: {dealerTotal}");
                     }
                 }
-                else
+                else if (userInput == "stand")
                 {
-                    var dealerTotal = 0;
-                    Console.WriteLine("you want to stand?");
-                    Console.WriteLine("Here's the Dealer's Hand");
+                    // var dealerTotal = 0;
                     //display dealer cards
+                    Console.WriteLine("--------------");
                     Console.WriteLine("Dealer's Cards");
+                    Console.WriteLine("--------------");
                     Console.WriteLine($"{dealerHand[0].Rank} {dealerHand[0].Suit}");
                     Console.WriteLine($"{dealerHand[1].Rank} {dealerHand[1].Suit}");
 
@@ -138,10 +156,48 @@ namespace BlackJack
                     {
                         dealerTotal += dealerHand[i].Value();
                     }
-                    Console.WriteLine($"Dealer's total is: {dealerTotal}");
-                    // if ( dealerTotal > newTotal)
-                    // isRunning = false;
+                    Console.WriteLine($"Dealer's Total: {dealerTotal}");
+                    if (dealerTotal < 17)
+                    {
+                        var newDealerCard = deck[0];
+
+                        Console.WriteLine($"{newDealerCard.Rank} {newDealerCard.Suit}");
+                        dealerHand.Add(deck[0]);
+                        deck.RemoveAt(0);
+
+                        for (int i = 0; i < dealerHand.Count; i++)
+                        {
+                            newDealerTotal += dealerHand[i].Value();
+                        }
+                        Console.WriteLine($"Dealer's New Total: {newDealerTotal}");
+                    }
+
+
                 }
+                else if (newDealerTotal > 21)
+                {
+                    Console.WriteLine("Dealer Bust you won");
+                }
+
+                // else if (newTotal == newDealerTotal || newTotal == dealerTotal)
+                // {
+                //     Console.WriteLine("~~ Tie ~~ Dealer Wins!");
+                // }
+
+                // else if (newDealerTotal > newTotal && newDealerTotal > 21)
+                // {
+                //     Console.WriteLine("Does this work?");
+                // }
+                else if (userInput == "quit")
+                {
+                    isRunning = false;
+                }
+                else if (userInput == "play")
+                {
+                    isRunning = true;
+                    Console.WriteLine("play again");
+                }
+
             }
 
 
