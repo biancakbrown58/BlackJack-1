@@ -143,7 +143,6 @@ namespace BlackJack
                 }
                 else if (userInput == "stand")
                 {
-                    // var dealerTotal = 0;
                     //display dealer cards
                     Console.WriteLine("--------------");
                     Console.WriteLine("Dealer's Cards");
@@ -160,7 +159,6 @@ namespace BlackJack
                     if (dealerTotal < 17)
                     {
                         var newDealerCard = deck[0];
-
                         Console.WriteLine($"{newDealerCard.Rank} {newDealerCard.Suit}");
                         dealerHand.Add(deck[0]);
                         deck.RemoveAt(0);
@@ -171,36 +169,16 @@ namespace BlackJack
                         }
                         Console.WriteLine($"Dealer's New Total: {newDealerTotal}");
                     }
-
-
                 }
                 else if (newDealerTotal > 21)
                 {
                     Console.WriteLine("Dealer Bust you won");
                 }
-
-                // else if (newTotal == newDealerTotal || newTotal == dealerTotal)
-                // {
-                //     Console.WriteLine("~~ Tie ~~ Dealer Wins!");
-                // }
-
-                // else if (newDealerTotal > newTotal && newDealerTotal > 21)
-                // {
-                //     Console.WriteLine("Does this work?");
-                // }
                 else if (userInput == "quit")
                 {
                     isRunning = false;
                 }
-                else if (userInput == "play")
-                {
-                    isRunning = true;
-                    Console.WriteLine("play again");
-                }
-
             }
-
-
         }
     }
 }
